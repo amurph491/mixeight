@@ -9,6 +9,5 @@ Mixeight::Application.routes.draw do
   
   match '/songs' , to: 'songs#index'
   match '/upload', to: 'songs#upload'
-
   match '/delete', to: 'songs#delete'
 end
