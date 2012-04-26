@@ -1,6 +1,6 @@
 <section id="audio"></section>
 
-  <ul id = "songs">
+  <ul class = "songs">
 <% @songs.each do |song| %>  
    <li><%= link_to image_tag('play.jpg'), download_url_for(song.key), :class => "html5" %>
    <%= get_title(song.key) %> - <td><%= link_to "Download", download_url_for(song.key) %></td>
@@ -10,7 +10,7 @@
 </ul id = "songs">
 
 
-<h2>Upload a new MP3:</h2>  
+<h2 id = "upload">Upload a new MP3:</h2>  
 <%= form_tag upload_path, :method => "post", :multipart => true do %>  
     <%= file_field_tag "mp3file" %>  
     <%= submit_tag "Upload" %>  

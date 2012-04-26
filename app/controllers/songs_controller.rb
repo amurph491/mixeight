@@ -22,12 +22,6 @@ class SongsController < ApplicationController
 	end
   end
   
-  	def get_title(file_name)
-		title = file_name
-		title.sub(".mp3",'')
-		title.sub('-',' ')
-	end
-  
   private  
   
 	def sanitize_filename(file_name)  
