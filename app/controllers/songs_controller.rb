@@ -1,6 +1,7 @@
 class SongsController < ApplicationController
   def index
 	@songs = AWS::S3::Bucket.find(BUCKET).objects
+	@info = Song.all
   end
 
   def upload
@@ -20,6 +21,14 @@ class SongsController < ApplicationController
 	else
 		render :text => "Song was not found!"
 	end
+  end
+  
+  def vote_up
+	
+  end
+  
+  def vote_down
+	
   end
   
   private  
