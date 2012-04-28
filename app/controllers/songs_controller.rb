@@ -7,9 +7,10 @@ class SongsController < ApplicationController
   def upload
 	begin
 	name = sanitize_filename(params[:mp3file].original_filename)
+	render :text => name
 	AWS::S3::S3Object.store(name, params[:mp3file].read, BUCKET, :access => :public_read)
-	#Song.create(title: get_title(), song_id: name)
-	redirect_to root_path
+	Song.create(title: get_title(), song_id: name)
+	#redirect_to root_path
 	rescue
 		render :text => "Upload failed"
 	end
