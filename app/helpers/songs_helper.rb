@@ -1,5 +1,7 @@
 module SongsHelper
 	def get_title(song_key)
-		Song.find_by_song_id(song_key).title
+		t = song_key.gsub(".mp3", "")
+		t = t.gsub("m4a", "")
+		t = t.gsub(/[-_]/, " ")
 	end
 end

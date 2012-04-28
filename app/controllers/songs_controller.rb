@@ -3,11 +3,12 @@ class SongsController < ApplicationController
 	@songs = AWS::S3::Bucket.find(BUCKET).objects
 	@info = Song.all
   end
-
+  
   def upload
 	begin
-	AWS::S3::S3Object.store(sanitize_filename(params[:mp3file].original_filename), 
-	params[:mp3file].read, BUCKET, :access => :public_read)
+	name = sanitize_filename(params[:mp3file].original_filename)
+	AWS::S3::S3Object.store(name, params[:mp3file].read, BUCKET, :access => :public_read)
+	#Song.create(title: get_title(), song_id: name)
 	redirect_to root_path
 	rescue
 		render :text => "Upload failed"
@@ -23,11 +24,27 @@ class SongsController < ApplicationController
 	end
   end
   
-  def vote_up
-	
+  def upvote
+	if(params[:song])
+		s = Song.find_by_song_id(params[:song])
+		s.upvotes += 1
+		s.save
+		flash[:notice] = "#{s.title} upvoted"
+		redirect_to songs_path
+	else
+		render :text => "Can't upvote -- Song not found"
+	end;
   end
   
-  def vote_down
+  def downvote
+	if(params[:song])
+		s = Song.find_by_song_id(params[:song])
+		s.downvotes += 1
+		s.save
+		redirect_to songs_path
+	else
+		render :text => "Can't downvote -- Song not found"
+	end
 	
   end
   

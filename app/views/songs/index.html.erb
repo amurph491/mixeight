@@ -3,8 +3,10 @@
   <ul class = "songs">
 <% @songs.each do |file| %>  
    <li><%= link_to image_tag('play.jpg'), download_url_for(file.key), :class => "html5" %>
-   <%= @info.find_by_song_id(file.key).title %> - <%= @info.find_by_song_id(file.key).artist %> --- <td><%= link_to "Download", download_url_for(file.key) %></td>
-   <%= link_to "Delete",  "delete/?song=" + file.key, :confirm => 'Are you sure you want to delete ' + file.key + '?' %>
+   <%= Song.where(:song_id => file.etag).first.title %> - <%= Song.find_by_song_id(file.etag).artist %> --- <td><%= link_to "Download", download_url_for(file.key) %></td>
+   <%= link_to "Upvote", "upvote/?song=" + file.etag %>
+   <%= link_to "Downvote", "downvote/?song=" + file.etag %>
+  <%= link_to "Delete",  "delete/?song=" + file.etag, :confirm => 'Are you sure you want to delete ' + file.key + '?' %>
 	</li>
    <% end %>  
 </ul id = "songs">

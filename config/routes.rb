@@ -10,4 +10,6 @@ Mixeight::Application.routes.draw do
   match '/songs' , to: 'songs#index'
   match '/upload', to: 'songs#upload'
   match '/delete', to: 'songs#delete'
+  match '/upvote', to: 'songs#upvote'
+  match '/downvote', to: 'songs#downvote'
 end
