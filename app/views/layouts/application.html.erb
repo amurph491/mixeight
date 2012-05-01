@@ -2,7 +2,7 @@
 <html>
 	<head>
 	  <title><%= full_title(yield(:title)) %></title>
-	  <%= stylesheet_link_tag    "application", media: "all" %>
+	  <%= stylesheet_link_tag "application", media: "all" %>
 	  <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js" %>
 	  <%= javascript_include_tag "application" %>
 	  <%= csrf_meta_tags %>
@@ -24,15 +24,13 @@
 	</head>
 	<body>
 		<%= render 'layouts/header' %>
-		
-		<% if flash[:notice] -%>
-			<p class = 'notice'><%=h flash[:notice] %></p>
-		<%end -%>
-
-	<div class="container">
+		<div class="container">
+			<% flash.each do |key, value| %>
+				<div class="alert alert-<%=key %>"><%= value %></div>
+			<% end %>
 		<%= yield %>
 		<%= render 'layouts/footer'%>
+		<%= debug(params) if Rails.env.development? %>
 	</div>
-
-	</body>
+  </body>
 </html>

@@ -1,5 +1,5 @@
 Mixeight::Application.routes.draw do
-  get 'users/new'
+  resources :users
 
   root to: 'static_pages#home'
   match '/signup', to: 'users#new'
@@ -12,4 +12,6 @@ Mixeight::Application.routes.draw do
   match '/delete', to: 'songs#delete'
   match '/upvote', to: 'songs#upvote'
   match '/downvote', to: 'songs#downvote'
+  
+  
 end
