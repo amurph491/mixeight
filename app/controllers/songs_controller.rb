@@ -1,24 +1,23 @@
 class SongsController < ApplicationController
-  def index
-	@songs = AWS::S3::Bucket.find(BUCKET).objects
-	@info = Song.all
+  def new
+	@song = Song.new()
   end
   
-  def upload
-	begin
-	name = sanitize_filename(params[:mp3file].original_filename)
-	render :text => name
-	AWS::S3::S3Object.store(name, params[:mp3file].read, BUCKET, :access => :public_read)
-	Song.create(title: get_title(), song_id: name)
-	#redirect_to root_path
-	rescue
-		render :text => "Upload failed"
+  def index
+	@songs = Song.all
+  end
+  
+  def create
+		@song = Song.new(params[:song])
+	if @song.save!
+	else
+		render 'new'
 	end
   end
 
   def delete
 	if(params[:song])
-		AWS::S3::S3Object.find(params[:song], BUCKET).delete
+		#AWS::S3::S3Object.find(params[:song], BUCKET).delete
 		redirect_to root_path
 	else
 		render :text => "Song was not found!"

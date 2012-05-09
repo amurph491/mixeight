@@ -1,5 +1,6 @@
 Mixeight::Application.routes.draw do
   resources :users
+  resources :songs
   resources :sessions, only: [:new, :create, :destroy]
 
   root to: 'static_pages#home'
@@ -11,10 +12,8 @@ Mixeight::Application.routes.draw do
   match '/contact', to: 'static_pages#contact'
   
   match '/songs' , to: 'songs#index'
-  match '/upload', to: 'songs#upload'
+  match '/upload', to: 'songs#new'
   match '/delete', to: 'songs#delete'
   match '/upvote', to: 'songs#upvote'
   match '/downvote', to: 'songs#downvote'
-  
-  
 end

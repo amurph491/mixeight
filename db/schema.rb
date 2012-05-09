@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120503051051) do
+ActiveRecord::Schema.define(:version => 20120509053713) do
 
   create_table "songs", :force => true do |t|
     t.integer  "upvotes"
@@ -20,9 +20,13 @@ ActiveRecord::Schema.define(:version => 20120503051051) do
     t.string   "artist"
     t.integer  "bpm"
     t.text     "summary"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
     t.string   "song_id"
+    t.string   "song_file_file_name"
+    t.string   "song_file_content_type"
+    t.integer  "song_file_file_size"
+    t.datetime "song_file_updated_at"
   end
 
   create_table "users", :force => true do |t|

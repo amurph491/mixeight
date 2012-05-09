@@ -1,19 +1,12 @@
 <section id="audio"></section>
 
-  <ul class = "songs">
-<% @songs.each do |file| %>  
-   <li><%= link_to image_tag('play.jpg'), download_url_for(file.key), :class => "html5" %>
-   <%= Song.find_by_song_id(file.etag).title %> - <%= Song.find_by_song_id(file.etag).artist %> --- <td><%= link_to "Download", download_url_for(file.etag) %></td>
-   <%= link_to "Upvote", "upvote/?song=" + file.etag %>
-   <%= link_to "Downvote", "downvote/?song=" + file.etag %>
-  <%= link_to "Delete",  "delete/?song=" + file.key, :confirm => 'Are you sure you want to delete ' + file.key + '?' %>
-	</li>
-   <% end %>  
-</ul id = "songs">
-
-
-<h2 id = "upload">Upload a new MP3:</h2>  
-<%= form_tag upload_path, :method => "post", :multipart => true do %>  
-    <%= file_field_tag "mp3file" %>  
-    <%= submit_tag "Upload" %>  
-<% end %> 
+<ul class = "songs">
+	<% @songs.each do |s| %>  
+		<li><%= link_to image_tag('play.jpg'), s.song_file.url, :class => "html5" %>
+		<%= s.title %> - <%= s.artist %> --- <td><%= link_to "Download", s.song_file.url %></td>
+		<%= link_to "Upvote", "upvote/?song=" + s.title %>
+		<%= link_to "Downvote", "downvote/?song=" + s.title %>
+		<%= link_to "Delete",  "delete/?song=" + s.title, :confirm => 'Are you sure you want to delete ' + s.title + '?' %>
+		</li>
+	<% end %>  
+</ul>

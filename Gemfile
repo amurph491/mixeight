@@ -4,6 +4,8 @@ gem 'rails', '3.2.3'
 gem 'bootstrap-sass', '2.0.0'
 gem 'aws-s3', :require => 'aws/s3'
 gem 'bcrypt-ruby', '3.0.1'
+gem 'paperclip'
+gem 'aws-sdk'
 
 
 # Bundle edge Rails instead:

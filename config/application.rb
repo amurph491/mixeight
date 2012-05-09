@@ -47,10 +47,10 @@ module Mixeight
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
 
-    AWS::S3::Base.establish_connection!(
-	:access_key_id => 'AKIAIAH24OEHSDVAFZIQ',
-	:secret_access_key => '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'
-	)
+    # AWS::S3::Base.establish_connection!(
+	# :access_key_id => 'AKIAIAH24OEHSDVAFZIQ',
+	# :secret_access_key => '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'
+	# )
 
     config.active_record.whitelist_attributes = true
 
