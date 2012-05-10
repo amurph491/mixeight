@@ -10,6 +10,7 @@ class SongsController < ApplicationController
   def create
 		@song = Song.new(params[:song])
 	if @song.save!
+		redirect_to songs_path
 	else
 		render 'new'
 	end
