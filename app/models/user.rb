@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
 
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token
+  before_save :notAdmin
 
   validates :name, presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -24,8 +25,16 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6 }
   validates :password_confirmation, presence: true
   
+  def setAdmin
+	self.admin = true
+  end
+  
    private
     def create_remember_token
       self.remember_token = SecureRandom.urlsafe_base64
     end
+	
+	def notAdmin
+		self.admin = false
+	end
 end

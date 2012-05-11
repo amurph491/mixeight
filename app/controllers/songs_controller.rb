@@ -18,8 +18,9 @@ class SongsController < ApplicationController
 
   def delete
 	if(params[:song])
-		#AWS::S3::S3Object.find(params[:song], BUCKET).delete
-		redirect_to root_path
+		s = Song.find_by_title(params[:song])
+		s.delete
+		redirect_to songs_path
 	else
 		render :text => "Song was not found!"
 	end
@@ -27,7 +28,7 @@ class SongsController < ApplicationController
   
   def upvote
 	if(params[:song])
-		s = Song.find_by_song_id(params[:song])
+		s = Song.find_by_title(params[:song])
 		s.upvotes += 1
 		s.save
 		flash[:notice] = "#{s.title} upvoted"
@@ -39,7 +40,7 @@ class SongsController < ApplicationController
   
   def downvote
 	if(params[:song])
-		s = Song.find_by_song_id(params[:song])
+		s = Song.find_by_title(params[:song])
 		s.downvotes += 1
 		s.save
 		redirect_to songs_path
