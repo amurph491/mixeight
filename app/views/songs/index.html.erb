@@ -1,6 +1,7 @@
 <section id="audio"></section>
 <%= link_to "Upload Song", upload_path, class: "btn btn-large btn-primary" %>
 <ul class = "songs">
+<h2>Songs</h2>
 	<% @songs.each do |s| %>  
 		<li><%= link_to image_tag('play.jpg'), s.song_file.url, :class => "html5" %>
 		<%= s.title %> - <%= s.artist %> --- <td><%= link_to "Download", s.song_file.url %></td>
