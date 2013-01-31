@@ -4,6 +4,8 @@
 	<% @songs.each do |s| %>  
 		<li><%= link_to image_tag('play.jpg'), s.song_file.url, :class => "html5" %>
 		<%= s.title %> - <%= s.artist %> --- <td><%= link_to "Download", s.song_file.url %></td>
+		<%= link_to "Upvote", "upvote/?song=" + s.title %>
+		<%= link_to "Downvote", "downvote/?song=" + s.title %>
 		<%= link_to "Delete",  "delete/?song=" + s.title, :confirm => 'Are you sure you want to delete ' + s.title + '?' %>
 		</li>
 	<% end %>  
